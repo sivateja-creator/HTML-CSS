@@ -1,0 +1,1943 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ultimate HTML, CSS, and Bootstrap Reference Guide from Scratch to Advanced.">
+  <title>HTML, CSS & Bootstrap Master Reference Guide</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --font-primary: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --transition-speed: 0.3s;
+      
+      /* Dark Theme Variables */
+      --bg-main: #0b0f19;
+      --bg-sidebar: #111827;
+      --bg-card: rgba(17, 24, 39, 0.7);
+      --bg-card-hover: rgba(31, 41, 55, 0.8);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent-color: #6366f1; /* Indigo */
+      --accent-glow: rgba(99, 102, 241, 0.15);
+      --accent-teal: #14b8a6;
+      --bg-code: #1e1e2e;
+    }
+
+    [data-bs-theme="light"] {
+      --bg-main: #f8fafc;
+      --bg-sidebar: #ffffff;
+      --bg-card: rgba(255, 255, 255, 0.8);
+      --bg-card-hover: rgba(241, 245, 249, 0.9);
+      --border-color: rgba(0, 0, 0, 0.08);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --accent-color: #4f46e5;
+      --accent-glow: rgba(79, 70, 229, 0.1);
+      --accent-teal: #0d9488;
+      --bg-code: #f1f5f9;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-main);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-color);
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      width: 280px;
+      background-color: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      padding: 1.5rem 1rem;
+      overflow-y: auto;
+      transition: transform var(--transition-speed), background-color var(--transition-speed);
+    }
+
+    .sidebar-logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-color), var(--accent-teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-section-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      padding-left: 0.75rem;
+      font-weight: 700;
+    }
+
+    .sidebar .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      border-radius: 8px;
+      margin-bottom: 0.2rem;
+      transition: all 0.2s ease;
+    }
+
+    .sidebar .nav-link:hover {
+      color: var(--text-main);
+      background-color: var(--border-color);
+      transform: translateX(4px);
+    }
+
+    .sidebar .nav-link.active {
+      color: #fff;
+      background-color: var(--accent-color);
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+
+    /* Main Content Layout */
+    .main-wrapper {
+      margin-left: 280px;
+      padding: 2rem;
+      min-height: 100vh;
+      transition: margin-left var(--transition-speed);
+    }
+
+    /* Header Panel */
+    .header-panel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 1rem 1.5rem;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+    }
+
+    .search-box {
+      position: relative;
+      width: 350px;
+    }
+
+    .search-box input {
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding-left: 2.5rem;
+      border-radius: 30px;
+      transition: all 0.2s ease;
+    }
+
+    .search-box input:focus {
+      background-color: var(--bg-main);
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+      color: var(--text-main);
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    /* Theme Toggle */
+    .theme-toggle-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      background-color: var(--border-color);
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+    }
+
+    /* Section Cards */
+    .ref-section {
+      scroll-margin-top: 100px;
+      margin-bottom: 3rem;
+    }
+
+    .card-ref {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color var(--transition-speed);
+    }
+
+    .card-ref:hover {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .section-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent-color), var(--accent-teal));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Code Blocks */
+    .code-container {
+      position: relative;
+      margin: 1rem 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .code-header {
+      background-color: rgba(0, 0, 0, 0.2);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-primary);
+      font-size: 0.8rem;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-muted);
+    }
+
+    .copy-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      transition: color 0.2s;
+    }
+
+    .copy-btn:hover {
+      color: var(--accent-teal);
+    }
+
+    pre {
+      margin: 0;
+      padding: 1.2rem;
+      background-color: var(--bg-code);
+      overflow-x: auto;
+    }
+
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #e2e8f0;
+    }
+
+    .code-lang-css { color: #f472b6; }
+    .code-lang-html { color: #38bdf8; }
+
+    /* Interactive Demos */
+    .demo-box {
+      background-color: rgba(0, 0, 0, 0.15);
+      border: 1px dashed var(--border-color);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .demo-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent-teal);
+      margin-bottom: 1rem;
+    }
+
+    .box-model-demo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 0;
+    }
+
+    .bm-margin {
+      background: rgba(249, 115, 22, 0.15);
+      border: 2px dashed #f97316;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 0.75rem;
+      position: relative;
+    }
+    .bm-margin::after { content: "Margin (m-*)"; position: absolute; top: 2px; left: 6px; color: #f97316; font-weight: bold; }
+
+    .bm-border {
+      background: rgba(239, 68, 68, 0.15);
+      border: 3px solid #ef4444;
+      padding: 20px;
+      border-radius: 6px;
+      position: relative;
+    }
+    .bm-border::after { content: "Border (border)"; position: absolute; top: 2px; left: 6px; color: #ef4444; font-weight: bold; }
+
+    .bm-padding {
+      background: rgba(34, 197, 94, 0.15);
+      border: 2px dashed #22c55e;
+      padding: 20px;
+      border-radius: 4px;
+      position: relative;
+    }
+    .bm-padding::after { content: "Padding (p-*)"; position: absolute; top: 2px; left: 6px; color: #22c55e; font-weight: bold; }
+
+    .bm-content {
+      background: var(--accent-color);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* Grid Demo columns */
+    .grid-col-demo {
+      background-color: var(--accent-glow);
+      border: 1px solid var(--accent-color);
+      color: var(--text-main);
+      padding: 10px;
+      text-align: center;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .grid-col-demo:hover {
+      background-color: var(--accent-color);
+      color: #fff;
+    }
+
+    /* Flex Demo Playground container */
+    .flex-playground-area {
+      min-height: 150px;
+      background-color: rgba(0,0,0,0.25);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      padding: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .flex-demo-item {
+      background: linear-gradient(135deg, var(--accent-color), var(--accent-teal));
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    /* Custom Tables */
+    .table-ref {
+      color: var(--text-main);
+      border-color: var(--border-color);
+    }
+
+    .table-ref th {
+      background-color: rgba(0, 0, 0, 0.2);
+      color: var(--text-main);
+      font-weight: 600;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .table-ref td {
+      vertical-align: middle;
+    }
+
+    /* Badges */
+    .badge-attr {
+      background-color: rgba(20, 184, 166, 0.1);
+      color: var(--accent-teal);
+      border: 1px solid rgba(20, 184, 166, 0.2);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 0.25rem 0.5rem;
+    }
+
+    .badge-css {
+      background-color: rgba(244, 114, 182, 0.1);
+      color: #f472b6;
+      border: 1px solid rgba(244, 114, 182, 0.2);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 0.25rem 0.5rem;
+    }
+
+    .badge-bootstrap {
+      background-color: rgba(99, 102, 241, 0.1);
+      color: var(--accent-color);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 0.25rem 0.5rem;
+    }
+
+    /* Mobile Sidebar Toggle */
+    .mobile-nav-toggle {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 101;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Custom Image Demo boxes */
+    .image-preview-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    
+    .img-demo-card {
+      background-color: rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .aspect-ratio-demo-box {
+      background-color: var(--accent-glow);
+      border: 2px dashed var(--accent-color);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    @media (max-width: 991.98px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      .main-wrapper {
+        margin-left: 0;
+        padding: 1rem;
+      }
+      .mobile-nav-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .search-box {
+        width: 100%;
+        max-width: 250px;
+      }
+    }
+  </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#sidebarMenu" data-bs-offset="120">
+
+  <!-- Mobile Toggle -->
+  <button class="mobile-nav-toggle" id="menuToggle" aria-label="Toggle Navigation">
+    <i class="bi bi-list"></i>
+  </button>
+
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebarMenu">
+    <div class="sidebar-logo">
+      <i class="bi bi-code-square"></i> WebDev Master
+    </div>
+    
+    <div class="nav flex-column nav-pills">
+      <div class="nav-section-title">01. Foundations</div>
+      <a class="nav-link active" href="#section-intro"><i class="bi bi-file-earmark-code"></i> Integration & Setup</a>
+      <a class="nav-link" href="#section-html-basics"><i class="bi bi-filetype-html"></i> HTML Core Attributes</a>
+      <a class="nav-link" href="#section-css-basics"><i class="bi bi-filetype-css"></i> CSS & Box Model</a>
+      
+      <div class="nav-section-title">02. Grid & Layouts</div>
+      <a class="nav-link" href="#section-grid"><i class="bi bi-grid-3x3-gap"></i> Grid System</a>
+      <a class="nav-link" href="#section-flexbox"><i class="bi bi-columns-gap"></i> Flexbox & Alignment</a>
+      <a class="nav-link" href="#section-spacing"><i class="bi bi-distribute-vertical"></i> Spacing Utilities</a>
+      
+      <div class="nav-section-title">03. UI Elements</div>
+      <a class="nav-link" href="#section-tables"><i class="bi bi-table"></i> Tables Reference</a>
+      <a class="nav-link" href="#section-navbars"><i class="bi bi-window-split"></i> Navbars & Headers</a>
+      <a class="nav-link" href="#section-images"><i class="bi bi-image"></i> Images & Ratios</a>
+      <a class="nav-link" href="#section-visuals"><i class="bi bi-palette"></i> Typography & Colors</a>
+      
+      <div class="nav-section-title">04. Advanced Components</div>
+      <a class="nav-link" href="#section-interactive"><i class="bi bi-cpu"></i> Data Attributes & JS</a>
+      <a class="nav-link" href="#section-accessibility"><i class="bi bi-universal-access"></i> ARIA & Accessibility</a>
+      <a class="nav-link" href="#section-customization"><i class="bi bi-sliders"></i> Custom CSS & Overrides</a>
+    </div>
+  </nav>
+
+  <!-- Main Wrapper -->
+  <div class="main-wrapper">
+    
+    <!-- Top Header -->
+    <header class="header-panel">
+      <div class="search-box">
+        <i class="bi bi-search"></i>
+        <input type="text" class="form-control" id="searchBar" placeholder="Search classes, attributes or CSS rules...">
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
+          <i class="bi bi-sun-fill" id="themeIcon"></i>
+        </button>
+      </div>
+    </header>
+
+    <div id="contentArea">
+
+      <!-- Section: Integration & Setup -->
+      <section id="section-intro" class="ref-section">
+        <div class="card-ref">
+          <div class="section-icon"><i class="bi bi-file-earmark-code"></i></div>
+          <h2>Integration & Setup</h2>
+          <p class="text-muted">Start utilizing HTML5, CSS3 variables, and Bootstrap 5.3 CDN configurations directly in your web files.</p>
+          
+          <div class="table-responsive mt-4">
+            <table class="table table-ref table-hover align-middle">
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Source Integration Tag</th>
+                  <th>Use Case</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Bootstrap CSS CDN</strong></td>
+                  <td><code>&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt;</code></td>
+                  <td>Add in <code>&lt;head&gt;</code> for layout and pre-made styles.</td>
+                </tr>
+                <tr>
+                  <td><strong>Bootstrap JS CDN</strong></td>
+                  <td><code>&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</code></td>
+                  <td>Add before <code>&lt;/body&gt;</code> for modals, dropdowns, tooltips.</td>
+                </tr>
+                <tr>
+                  <td><strong>Custom CSS Link</strong></td>
+                  <td><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></td>
+                  <td>Add in <code>&lt;head&gt;</code> *after* Bootstrap for custom override styles.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>Standard Starter Template (HTML)</span>
+              <button class="copy-btn"><i class="bi bi-clipboard"></i> Copy</button>
+            </div>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Bootstrap Starter&lt;/title&gt;
+  &lt;!-- Bootstrap CSS --&gt;
+  &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+  &lt;!-- Custom Styles --&gt;
+  &lt;link rel="stylesheet" href="custom.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1 class="text-primary text-center my-5"&gt;Hello World!&lt;/h1&gt;
+
+  &lt;!-- Bootstrap Bundle JS with Popper --&gt;
+  &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: HTML Core Attributes -->
+      <section id="section-html-basics" class="ref-section">
+        <div class="card-ref">
+          <div class="section-icon"><i class="bi bi-filetype-html"></i></div>
+          <h2>HTML Core Attributes</h2>
+          <p class="text-muted">Global attributes that modify the behavior or style representation of standard HTML tags.</p>
+
+          <div class="table-responsive">
+            <table class="table table-ref table-hover">
+              <thead>
+                <tr>
+                  <th>HTML Attribute</th>
+                  <th>Purpose</th>
+                  <th>CSS Equivalent Selector</th>
+                  <th>Code Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="badge badge-attr">class</span></td>
+                  <td>Assigns class names for styling or grouping elements. Can take multiple classes.</td>
+                  <td><code>.classname { }</code></td>
+                  <td><code>&lt;div class="text-center p-3"&gt;</code></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-attr">id</span></td>
+                  <td>Unique identifier for an element. Essential for CSS specificity, anchor targets, and JavaScript bindings.</td>
+                  <td><code>#idname { }</code></td>
+                  <td><code>&lt;section id="contact"&gt;</code></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-attr">style</span></td>
+                  <td>Applies inline CSS directly to the element. Has the highest specificity weight.</td>
+                  <td>Direct rendering overrides stylesheet</td>
+                  <td><code>&lt;div style="color: red; padding: 10px;"&gt;</code></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-attr">title</span></td>
+                  <td>Tooltip popover displayed when hovering over an element. Good for extra info.</td>
+                  <td>Browser default rendering</td>
+                  <td><code>&lt;button title="Click to Submit"&gt;</code></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-attr">hidden</span></td>
+                  <td>Hides the element from the display. Equivalent to display: none.</td>
+                  <td><code>[hidden] { display: none; }</code></td>
+                  <td><code>&lt;input type="text" hidden&gt;</code></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-attr">data-*</span></td>
+                  <td>Custom user attributes allowing metadata to be stored on elements. Critical for Bootstrap scripts.</td>
+                  <td><code>[data-*]</code> (Attribute Selector)</td>
+                  <td><code>&lt;div data-user-role="admin"&gt;</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: CSS & Box Model -->
+      <section id="section-css-basics" class="ref-section">
+        <div class="card-ref">
+          <div class="section-icon"><i class="bi bi-filetype-css"></i></div>
+          <h2>CSS & The Box Model</h2>
+          <p class="text-muted">Understanding how the browser interprets size and layouts using standard CSS box properties.</p>
+
+          <div class="box-model-demo">
+            <div class="bm-margin">
+              <div class="bm-border">
+                <div class="bm-padding">
+                  <div class="bm-content">
+                    Content Box
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive mt-3">
+            <table class="table table-ref table-hover">
+              <thead>
+                <tr>
+                  <th>Concept</th>
+                  <th>CSS Property</th>
+                  <th>Bootstrap Mapping</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Margin</strong></td>
+                  <td><span class="badge badge-css">margin</span></td>
+                  <td><span class="badge badge-bootstrap">m-*</span>, <span class="badge badge-bootstrap">mt-*</span>, <span class="badge badge-bootstrap">mb-*</span></td>
+                  <td>Spacing outside the border line. Pushes adjacent elements away.</td>
+                </tr>
+                <tr>
+                  <td><strong>Border</strong></td>
+                  <td><span class="badge badge-css">border</span></td>
+                  <td><span class="badge badge-bootstrap">border</span>, <span class="badge badge-bootstrap">border-primary</span></td>
+                  <td>Line wrapping around padding and content box. Can define width, style, color.</td>
+                </tr>
+                <tr>
+                  <td><strong>Padding</strong></td>
+                  <td><span class="badge badge-css">padding</span></td>
+                  <td><span class="badge badge-bootstrap">p-*</span>, <span class="badge badge-bootstrap">px-*</span>, <span class="badge badge-bootstrap">py-*</span></td>
+                  <td>Spacing inside the element between the content and the border line.</td>
+                </tr>
+                <tr>
+                  <td><strong>Content</strong></td>
+                  <td><span class="badge badge-css">width</span> / <span class="badge badge-css">height</span></td>
+                  <td><span class="badge badge-bootstrap">w-100</span>, <span class="badge badge-bootstrap">h-50</span></td>
+                  <td>The actual size of text, images, or child nested objects inside.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Bootstrap Grid System -->
+      <section id="section-grid" class="ref-section">
+        <div class="card-ref">
+          <div class="section-icon"><i class="bi bi-grid-3x3-gap"></i></div>
+          <h2>Bootstrap Grid System (Flexbox Powered)</h2>
+          <p class="text-muted">Build fully responsive grid architectures using containers, rows, columns, and breakpoint modifiers.</p>
+
+          <div class="demo-box">
+            <div class="demo-title">Interactive Grid System Preview</div>
+            
+            <div class="row mb-3 align-items-center">
+              <div class="col-md-6">
+                <label for="gridColSelect" class="form-label">Select Grid Configuration:</label>
+                <select class="form-select" id="gridColSelect">
+                  <option value="12">12 equal columns (col-1)</option>
+                  <option value="4" selected>3 equal columns (col-4)</option>
+                  <option value="6">2 equal columns (col-6)</option>
+                  <option value="hybrid">Unequal columns (col-8 + col-4)</option>
+                  <option value="responsive">Responsive breakpoint columns (col-md-4 col-sm-6)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Dynamic grid container target -->
+            <div id="gridDemoWrapper" class="row">
+              <!-- Dynamically populated by JS -->
+            </div>
+          </div>
+
+          <div class="table-responsive mt-4">
+            <table class="table table-ref table-hover">
+              <thead>
+                <tr>
+                  <th>Breakpoint</th>
+                  <th>Infix Class</th>
+                  <th>Screen Range (CSS min-width)</th>
+                  <th>Media Query Syntax</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Extra small</td>
+                  <td><em>None</em></td>
+                  <td>&lt; 576px</td>
+                  <td>Default style rules (mobile-first)</td>
+                </tr>
+                <tr>
+                  <td>Small</td>
+                  <td><code>sm</code></td>
+                  <td>&ge; 576px</td>
+                  <td><code>@media (min-width: 576px) { ... }</code></td>
+                </tr>
+                <tr>
+                  <td>Medium</td>
+                  <td><code>md</code></td>
+                  <td>&ge; 768px</td>
+                  <td><code>@media (min-width: 768px) { ... }</code></td>
+                </tr>
+                <tr>
+                  <td>Large</td>
+                  <td><code>lg</code></td>
+                  <td>&ge; 992px</td>
+                  <td><code>@media (min-width: 992px) { ... }</code></td>
+                </tr>
+                <tr>
+                  <td>Extra large</td>
+                  <td><code>xl</code></td>
+                  <td>&ge; 1200px</td>
+                  <td><code>@media (min-width: 1200px) { ... }</code></td>
+                </tr>
+                <tr>
+                  <td>Extra extra large</td>
+                  <td><code>xxl</code></td>
+                  <td>&ge; 1400px</td>
+                  <td><code>@media (min-width: 1400px) { ... }</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>Complex Responsive Layout Markup</span>
+              <button class="copy-btn"><i class="bi bi-clipboard"></i> Copy</button>
+            </div>
+            <pre><code>&lt;!-- Grid Layout Container --&gt;
+&lt;div class="container my-5"&gt;
+  &lt;div class="row g-4"&gt;
+    &lt;!-- Main Content: 8 columns wide on MD screens, 12 on mobile --&gt;
+    &lt;main class="col-12 col-md-8 bg-light p-4 rounded"&gt;
+      &lt;h2&gt;Main Article Content&lt;/h2&gt;
+      &lt;p&gt;This content box scales and stretches dynamically.&lt;/p&gt;
+    &lt;/main&gt;
+    
+    &lt;!-- Sidebar: 4 columns wide on MD screens, 12 on mobile --&gt;
+    &lt;aside class="col-12 col-md-4 bg-dark text-white p-4 rounded"&gt;
+      &lt;h3&gt;Sidebar Info&lt;/h3&gt;
+      &lt;p&gt;Quick links or details.&lt;/p&gt;
+    &lt;/aside&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Flexbox & Alignment -->
+      <section id="section-flexbox" class="ref-section">
+        <div class="card-ref">
+          <div class="section-icon"><i class="bi bi-columns-gap"></i></div>
+          <h2>Flexbox & Alignment Utilities</h2>
+          <p class="text-muted">Control the arrangement and alignment of layouts dynamically without manual CSS styles.</p>
+
+          <div class="demo-box">
+            <div class="demo-title">Interactive Flexbox Alignment Simulator</div>
+            
+            <div class="row mb-3 g-2">
+              <div class="col-md-6">
+                <label class="form-label">Justify Content (X-axis):</label>
+                <div class="d-flex flex-wrap gap-1">
+                  <button class="btn btn-sm btn-outline-primary flex-justify-btn active" data-class="justify-content-start">start</button>
+                  <button class="btn btn-sm btn-outline-primary flex-justify-btn" data-class="justify-content-center">center</button>
+                  <button class="btn btn-sm btn-outline-primary flex-justify-btn" data-class="justify-content-end">end</button>
+                  <button class="btn btn-sm btn-outline-primary flex-justify-btn" data-class="justify-content-between">between</button>
+                  <button class="btn btn-sm btn-outline-primary flex-justify-btn" data-class="justify-content-around">around</button>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Align Items (Y-axis):</label>
+                <div class="d-flex flex-wrap gap-1">
+                  <button class="btn btn-sm btn-outline-teal flex-align-btn active" data-class="align-items-start">start</button>
+                  <button class="btn btn-sm btn-outline-teal flex-align-btn" data-class="align-items-center">center</button>
+                  <button class="btn btn-sm btn-outline-teal flex-align-btn" data-class="align-items-end">end</button>
+                  <button class="btn btn-sm btn-outline-teal flex-align-btn" data-class="align-items-stretch">stretch</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex-playground-area d-flex justify-content-start align-items-start gap-3" id="flexContainerDemo">
+              <div class="flex-demo-item">1</div>
+              <div class="flex-demo-item">2</div>
+              <div class="flex-demo-item">3</div>
+            </div>
+            
+            <div class="mt-2 text-muted small">
+              Applied classes: <code class="text-primary" id="flexClassOutput">d-flex justify-content-start align-items-start gap-3</code>
+            </div>
+          </div>
+
+          <div class="table-responsive mt-4">
+            <table class="table table-ref table-hover">
+              <thead>
+                <tr>
+                  <th>Bootstrap Flex Class</th>
+                  <th>CSS Equivalent Styling</th>
+                  <th>Application Mapped</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>d-flex</code> / <code>d-inline-flex</code></td>
+                  <td><code>display: flex;</code> / <code>display: inline-flex;</code></td>
+                  <td>Sets flex context container.</td>
+                </tr>
+                <tr>
+                  <td><code>flex-row</code> / <code>flex-column</code></td>
+                  <td><code>flex-direction: row;</code> / <code>column;</code></td>
+                  <td>Sets primary layout axis.</td>
+                </tr>
+                <tr>
+                  <td><code>justify-content-center</code></td>
+                  <td><code>justify-content: center;</code></td>
+                  <td>Centers items on main axis.</td>
+                </tr>
+                <tr>
+                  <td><code>align-items-center</code></td>
+                  <td><code>align-items: center;</code></td>
+                  <td>Centers items on cross axis.</td>
+                </tr>
+                <tr>
+                  <td><code>flex-grow-1</code> / <code>flex-grow-0</code></td>
+                  <td><code>flex-grow: 1;</code> / <code>0;</code></td>
+                  <td>Allow elements to scale or resist expansion.</td>
+                </tr>
+                <tr>
+                  <td><code>gap-*</code> (0 to 5)</td>
+                  <td><code>gap: *rem;</code></td>
+                  <td>Sets spacing gap directly between items.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Spacing & Margins -->
+      <section id="section-spacing" class="ref-section">
+        <div class="card-ref">
+          <div class="section-icon"><i class="bi bi-distribute-vertical"></i></div>
+          <h2>Spacing (Margin & Padding) Utilities</h2>
+          <p class="text-muted">Bootstrap implements a spacer system based on <code>rem</code> units. Adjust spacing using helper formats.</p>
+
+          <div class="demo-box">
+            <div class="demo-title">Interactive Spacing Playground</div>
+            <div class="row align-items-center mb-3">
+              <div class="col-md-4">
+                <label for="spacingRange" class="form-label">Spacing Level (0 to 5): <span id="spacingValueText" class="fw-bold text-primary">3</span></label>
+                <input type="range" class="form-range" min="0" max="5" step="1" value="3" id="spacingRange">
+              </div>
+              <div class="col-md-8">
+                <div class="d-flex gap-2">
+                  <button class="btn btn-sm btn-outline-secondary spacing-type-btn active" data-type="p">Padding (p-*)</button>
+                  <button class="btn btn-sm btn-outline-secondary spacing-type-btn" data-type="m">Margin (m-*)</button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-dark p-4 rounded d-flex justify-content-center">
+              <div class="border border-secondary p-1" style="min-width: 300px;">
+                <div id="spacingDemoBox" class="bg-primary text-white text-center p-3" style="transition: all 0.2s;">
+                  Target Box
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive mt-4">
+            <table class="table table-ref table-hover">
+              <thead>
+                <tr>
+                  <th>Format</th>
+                  <th>Direction Mapped</th>
+                  <th>Bootstrap Level</th>
+                  <th>Calculated CSS Mapped Output</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>m-*</code> / <code>p-*</code></td>
+                  <td>All sides (top, bottom, left, right)</td>
+                  <td><code>0</code></td>
+                  <td><code>margin: 0 !important;</code> or <code>padding: 0 !important;</code></td>
+                </tr>
+                <tr>
+                  <td><code>mt-*</code> / <code>pt-*</code></td>
+                  <td>Top side only</td>
+                  <td><code>1</code></td>
+                  <td><code>0.25rem</code> (4px if root is 16px)</td>
+                </tr>
+                <tr>
+                  <td><code>mb-*</code> / <code>pb-*</code></td>
+                  <td>Bottom side only</td>
+                  <td><code>2</code></td>
+                  <td><code>0.5rem</code> (8px)</td>
+                </tr>
+                <tr>
+                  <td><code>ms-*</code> / <code>ps-*</code></td>
+                  <td>Start side (left in standard LTR)</td>
+                  <td><code>3</code></td>
+                  <td><code>1rem</code> (16px)</td>
+                </tr>
+                <tr>
+                  <td><code>me-*</code> / <code>pe-*</code></td>
+                  <td>End side (right in standard LTR)</td>
+                  <td><code>4</code></td>
+                  <td><code>1.5rem</code> (24px)</td>
+                </tr>
+                <tr>
+                  <td><code>mx-*</code> / <code>px-*</code></td>
+                  <td>Horizontal sides (both left & right)</td>
+                  <td><code>5</code></td>
+                  <td><code>3rem</code> (48px)</td>
+                </tr>
+                <tr>
+                  <td><code>my-*</code> / <code>py-*</code></td>
+                  <td>Vertical sides (both top & bottom)</td>
+                  <td><code>auto</code></td>
+                  <td><code>margin: auto !important;</code> (Useful for centering rows/containers)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Tables Reference -->
+      <section id="section-tables" class="ref-section">
+        <div class="card-ref">
+          <div class="section-icon"><i class="bi bi-table"></i></div>
+          <h2>Tables Reference & Utility Classes</h2>
+          <p class="text-muted">Control text grid data layouts with clean structures, striped rows, hovering row effects, and responsive wrapping boxes.</p>
+
+          <div class="demo-box">
+            <div class="demo-title">Interactive Table Simulator</div>
+            
+            <div class="row mb-3 g-3">
+              <div class="col-sm-6 col-md-3">
+                <div class="form-check form-switch">
+                  <input class="form-check-input table-opt-chk" type="checkbox" id="chkTableStriped" checked>
+                  <label class="form-check-label" for="chkTableStriped">Striped (table-striped)</label>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="form-check form-switch">
+                  <input class="form-check-input table-opt-chk" type="checkbox" id="chkTableHover" checked>
+                  <label class="form-check-label" for="chkTableHover">Hover (table-hover)</label>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="form-check form-switch">
+                  <input class="form-check-input table-opt-chk" type="checkbox" id="chkTableBordered">
+                  <label class="form-check-label" for="chkTableBordered">Bordered (table-bordered)</label>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="form-check form-switch">
+                  <input class="form-check-input table-opt-chk" type="checkbox" id="chkTableDark">
+                  <label class="form-check-label" for="chkTableDark">Dark Mode (table-dark)</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table align-middle" id="liveDemoTable">
+                <thead>
+                  <tr>
+                    <th># ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Role Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>101</td>
+                    <td>Alan</td>
+                    <td>Turing</td>
+                    <td><span class="badge bg-success">Active</span></td>
+                  </tr>
+                  <tr>
+                    <td>102</td>
+                    <td>Grace</td>
+                    <td>Hopper</td>
+                    <td><span class="badge bg-primary">On Leave</span></td>
+                  </tr>
+                  <tr>
+                    <td>103</td>
+                    <td>Ada</td>
+                    <td>Lovelace</td>
+                    <td><span class="badge bg-success">Active</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="mt-2 text-muted small">
+              Applied table classes: <code class="text-primary" id="tableClassOutput">table table-striped table-hover</code>
+            </div>
+          </div>
+
+          <div class="table-responsive mt-4">
+            <table class="table table-ref table-hover">
+              <thead>
+                <tr>
+                  <th>Bootstrap Table Class</th>
+                  <th>CSS Equivalent Action Mapped</th>
+                  <th>Visual Effect description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>.table</code></td>
+                  <td><code>width: 100%; border-collapse: collapse; margin-bottom: 1rem;</code></td>
+                  <td>Core structural base rules for tables. Adds spacing paddings.</td>
+                </tr>
+                <tr>
+                  <td><code>.table-striped</code></td>
+                  <td><code>tbody tr:nth-of-type(odd) { background-color: rgba(...) }</code></td>
+                  <td>Alternates background shading light colors across rows.</td>
+                </tr>
+                <tr>
+                  <td><code>.table-hover</code></td>
+                  <td><code>tbody tr:hover { background-color: rgba(...) }</code></td>
+                  <td>Triggers rows color glow highlight when hovering mouse.</td>
+                </tr>
+                <tr>
+                  <td><code>.table-bordered</code></td>
+                  <td><code>border: 1px solid var(--border-color);</code></td>
+                  <td>Adds border framing parameters around all cell cells.</td>
+                </tr>
+                <tr>
+                  <td><code>.table-responsive</code></td>
+                  <td><code>overflow-x: auto; -webkit-overflow-scrolling: touch;</code></td>
+                  <td>Creates a scrollable viewport horizontal wrapper for small screens.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>Striped Hover Responsive Table Code Block</span>
+              <button class="copy-btn"><i class="bi bi-clipboard"></i> Copy</button>
+            </div>
+            <pre><code>&lt;!-- Responsive table wrapper --&gt;
+&lt;div class="table-responsive"&gt;
+  &lt;table class="table table-striped table-hover align-middle"&gt;
+    &lt;thead class="table-dark"&gt;
+      &lt;tr&gt;
+        &lt;th scope="col"&gt;#&lt;/th&gt;
+        &lt;th scope="col"&gt;Item&lt;/th&gt;
+        &lt;th scope="col"&gt;Price&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;th scope="row"&gt;1&lt;/th&gt;
+        &lt;td&gt;Mechanical Keyboard&lt;/td&gt;
+        &lt;td&gt;$89.99&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Navbars & Headers -->
+      <section id="section-navbars" class="ref-section">
+        <div class="card-ref">
+          <div class="section-icon"><i class="bi bi-window-split"></i></div>
+          <h2>Navbars & Headers</h2>
+          <p class="text-muted">Construct fully responsive header navigation bars with search fields, hamburger triggers, and logo alignments.</p>
+
+          <div class="demo-box">
+            <div class="demo-title">Live Responsive Navbar Example</div>
+            
+            <nav class="navbar navbar-expand-lg bg-body-tertiary rounded border border-secondary p-2">
+              <div class="container-fluid">
+                <a class="navbar-brand text-primary fw-bold" href="#"><i class="bi bi-cpu-fill"></i> TechHub</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#liveDemoNavbarContent" aria-controls="liveDemoNavbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="liveDemoNavbarContent">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Products</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Services
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-menu-item dropdown-item" href="#">Web Dev</a></li>
+                        <li><a class="dropdown-menu-item dropdown-item" href="#">App Design</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                  <form class="d-flex" role="search" onsubmit="event.preventDefault();">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width: 150px;">
+                    <button class="btn btn-outline-primary" type="submit">Go</button>
+                  </form>
+                </div>
+              </div>
+            </nav>
+            
+            <div class="mt-2 text-muted small">
+              *Try resizing your browser or view in mobile window sizes to see this navbar collapse into a hamburger layout.
+            </div>
+          </div>
+
+          <div class="table-responsive mt-4">
+            <table class="table table-ref table-hover">
+              <thead>
+                <tr>
+                  <th>Bootstrap Navbar Element</th>
+                  <th>Purpose</th>
+                  <th>Key Mapped Attributes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>.navbar</code></td>
+                  <td>Parent flex box wrapper container. Sets up contextual alignment spacing.</td>
+                  <td>Provides padding, display flex configuration variables.</td>
+                </tr>
+                <tr>
+                  <td><code>.navbar-expand-{breakpoint}</code></td>
+                  <td>Dictates breakpoint width at which navbar collapses (e.g. <code>.navbar-expand-lg</code>).</td>
+                  <td>Responsive layout toggle mapping.</td>
+                </tr>
+                <tr>
+                  <td><code>.navbar-toggler</code></td>
+                  <td>The hamburger icon button visible *only* below the expand breakpoint threshold.</td>
+                  <td>Must bind <code>data-bs-toggle="collapse"</code> pointing to menu target.</td>
+                </tr>
+                <tr>
+                  <td><code>.navbar-nav</code> / <code>.nav-link</code></td>
+                  <td>Flex items container and active anchor style states.</td>
+                  <td>Clears standard list behaviors, adds smooth inline color hover highlights.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>Standard Responsive Navbar Code Block</span>
+              <button class="copy-btn"><i class="bi bi-clipboard"></i> Copy</button>
+            </div>
+            <pre><code>&lt;nav class="navbar navbar-expand-lg bg-dark navbar-dark"&gt;
+  &lt;div class="container-fluid"&gt;
+    &lt;!-- Brand Name / Logo --&gt;
+    &lt;a class="navbar-brand" href="#"&gt;Brand&lt;/a&gt;
+    
+    &lt;!-- Hamburger Trigger Button --&gt;
+    &lt;button class="navbar-toggler" type="button" 
+            data-bs-toggle="collapse" data-bs-target="#navbarText"&gt;
+      &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    
+    &lt;!-- Collapsible wrapper --&gt;
+    &lt;div class="collapse navbar-collapse" id="navbarText"&gt;
+      &lt;ul class="navbar-nav me-auto mb-2 mb-lg-0"&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link active" href="#"&gt;Home&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link" href="#"&gt;Link&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Images & Ratios -->
+      <section id="section-images" class="ref-section">
+        <div class="card-ref">
+          <div class="section-icon"><i class="bi bi-image"></i></div>
+          <h2>Images & Responsive Aspect Ratios</h2>
+          <p class="text-muted">Utilize helper classes to size images, wrap borders, and maintain strict responsive boxes regardless of width changes.</p>
+
+          <div class="demo-box">
+            <div class="demo-title">Image Styling Class Preview</div>
+            
+            <div class="image-preview-container">
+              <div class="img-demo-card">
+                <div class="mb-2 text-primary fw-bold">Fluid image (.img-fluid)</div>
+                <!-- Inline SVG to simulate responsive image asset -->
+                <svg class="img-fluid rounded" width="400" height="200" xmlns="http://www.w3.org/2000/svg" style="background: linear-gradient(135deg, #6366f1, #14b8a6); min-height: 120px;">
+                  <rect width="100%" height="100%" fill="none"/>
+                  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-family="'Outfit', sans-serif" font-weight="bold" font-size="16">Max Width 100%</text>
+                </svg>
+                <div class="mt-2 small text-muted">Scales down proportionally to fit the parent container width.</div>
+              </div>
+              
+              <div class="img-demo-card">
+                <div class="mb-2 text-primary fw-bold">Thumbnail image (.img-thumbnail)</div>
+                <svg class="img-thumbnail" width="400" height="200" xmlns="http://www.w3.org/2000/svg" style="background: linear-gradient(135deg, #14b8a6, #6366f1); min-height: 120px;">
+                  <rect width="100%" height="100%" fill="none"/>
+                  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-family="'Outfit', sans-serif" font-weight="bold" font-size="16">Thumbnail Border</text>
+                </svg>
+                <div class="mt-2 small text-muted">Adds a 1px border frame, soft padding, and rounded edge styling.</div>
+              </div>
+            </div>
+
+            <div class="demo-title mt-4">Aspect Ratio Helper Preview (.ratio)</div>
+            <div class="row g-3">
+              <div class="col-sm-4">
+                <div class="ratio ratio-16x9 aspect-ratio-demo-box">
+                  16x9 Ratio Container
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="ratio ratio-4x3 aspect-ratio-demo-box">
+                  4x3 Ratio Container
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="ratio ratio-1x1 aspect-ratio-demo-box">
+                  1x1 Square Ratio
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive mt-4">
+            <table class="table table-ref table-hover">
+              <thead>
+                <tr>
+                  <th>Class Modifier</th>
+                  <th>CSS Properties Applied Mapped</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>.img-fluid</code></td>
+                  <td><code>max-width: 100%; height: auto;</code></td>
+                  <td>Instructs images to resize smoothly inside grids without overflowing.</td>
+                </tr>
+                <tr>
+                  <td><code>.img-thumbnail</code></td>
+                  <td><code>padding: .25rem; border: 1px solid #dee2e6; border-radius: var(--bs-border-radius);</code></td>
+                  <td>Adds border outlines, margins, and drop shadow styles around pictures.</td>
+                </tr>
+                <tr>
+                  <td><code>.ratio</code></td>
+                  <td><code>position: relative; width: 100%;</code></td>
+                  <td>Creates a parent aspect ratio helper wrapper context.</td>
+                </tr>
+                <tr>
+                  <td><code>.ratio-16x9</code></td>
+                  <td><code>--bs-aspect-ratio: 56.25%;</code> (Padding-top formula)</td>
+                  <td>Locks child embedded assets (videos/images) to 16:9 widescreen formats.</td>
+                </tr>
+                <tr>
+                  <td><code>.ratio-4x3</code></td>
+                  <td><code>--bs-aspect-ratio: 75%;</code></td>
+                  <td>Locks container dimensions to 4:3 size scales.</td>
+                </tr>
+                <tr>
+                  <td><code>.ratio-1x1</code></td>
+                  <td><code>--bs-aspect-ratio: 100%;</code></td>
+                  <td>Locks box container to an exact square format.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>Image & Aspect Ratio Snippet</span>
+              <button class="copy-btn"><i class="bi bi-clipboard"></i> Copy</button>
+            </div>
+            <pre><code>&lt;!-- Responsive Image --&gt;
+&lt;img src="photo.jpg" class="img-fluid img-thumbnail rounded-circle" alt="Thumbnail Profile"&gt;
+
+&lt;!-- Locked Aspect Ratio Responsive Video --&gt;
+&lt;div class="ratio ratio-16x9"&gt;
+  &lt;iframe src="https://www.youtube.com/embed/demo" title="YouTube video" allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Typography & Colors -->
+      <section id="section-visuals" class="ref-section">
+        <div class="card-ref">
+          <div class="section-icon"><i class="bi bi-palette"></i></div>
+          <h2>Typography, Borders & Color Palettes</h2>
+          <p class="text-muted">Standard layout classes to modify elements visually. Includes shadows and border states.</p>
+
+          <div class="row mt-4">
+            <!-- Text Colors -->
+            <div class="col-md-6 mb-3">
+              <div class="p-3 border border-secondary rounded">
+                <h5>Theme Text Colors</h5>
+                <p class="text-primary my-1"><code>.text-primary</code> - Primary Brand</p>
+                <p class="text-secondary my-1"><code>.text-secondary</code> - Secondary Brand</p>
+                <p class="text-success my-1"><code>.text-success</code> - Success State</p>
+                <p class="text-danger my-1"><code>.text-danger</code> - Danger Alert</p>
+                <p class="text-warning my-1"><code>.text-warning</code> - Warning State</p>
+                <p class="text-info my-1"><code>.text-info</code> - Informative State</p>
+              </div>
+            </div>
+            <!-- Background Colors -->
+            <div class="col-md-6 mb-3">
+              <div class="p-3 border border-secondary rounded h-100">
+                <h5>Theme Backgrounds</h5>
+                <div class="d-flex flex-wrap gap-2">
+                  <span class="badge bg-primary p-2">bg-primary</span>
+                  <span class="badge bg-secondary p-2">bg-secondary</span>
+                  <span class="badge bg-success p-2">bg-success</span>
+                  <span class="badge bg-danger p-2 text-white">bg-danger</span>
+                  <span class="badge bg-warning text-dark p-2">bg-warning</span>
+                  <span class="badge bg-info text-dark p-2">bg-info</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive mt-3">
+            <table class="table table-ref table-hover">
+              <thead>
+                <tr>
+                  <th>Visual Category</th>
+                  <th>Bootstrap Classes Mapped</th>
+                  <th>Pure CSS Mapped Values</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Font Weights</strong></td>
+                  <td><code>.fw-light</code>, <code>.fw-normal</code>, <code>.fw-bold</code></td>
+                  <td><code>font-weight: 300</code>, <code>400</code>, <code>700</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Text Size Scale</strong></td>
+                  <td><code>.fs-1</code> to <code>.fs-6</code></td>
+                  <td>Matches size dimensions of <code>&lt;h1&gt;</code> down to <code>&lt;h6&gt;</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Borders</strong></td>
+                  <td><code>.border</code>, <code>.border-0</code>, <code>.border-top-0</code></td>
+                  <td><code>border: 1px solid</code>, removes specific borders.</td>
+                </tr>
+                <tr>
+                  <td><strong>Rounded Corners</strong></td>
+                  <td><code>.rounded-1</code>, <code>.rounded-circle</code>, <code>.rounded-pill</code></td>
+                  <td><code>border-radius: px/percent values</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Shadow Depth</strong></td>
+                  <td><code>.shadow-none</code>, <code>.shadow-sm</code>, <code>.shadow-lg</code></td>
+                  <td><code>box-shadow: offset-x offset-y blur spread color;</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Data Attributes & JS -->
+      <section id="section-interactive" class="ref-section">
+        <div class="card-ref">
+          <div class="section-icon"><i class="bi bi-cpu"></i></div>
+          <h2>Bootstrap Data Attributes & JS Hooks</h2>
+          <p class="text-muted">Construct robust, interactive components strictly using HTML <code>data-bs-*</code> attributes without writing custom JavaScript.</p>
+
+          <div class="row g-4 mt-2">
+            <!-- Modal Demo -->
+            <div class="col-md-6">
+              <div class="demo-box h-100">
+                <div class="demo-title">Interactive Modal Component</div>
+                
+                <!-- Trigger Button -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Launch Live Modal
+                </button>
+
+                <!-- Modal Markup -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Interactive Demonstration</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Bootstrap JS successfully triggered! The <code>data-bs-toggle="modal"</code> mapping hooks automatically.
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save Changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="code-container mt-3">
+                  <div class="code-header">
+                    <span>Modal Trigger Code</span>
+                    <button class="copy-btn"><i class="bi bi-clipboard"></i> Copy</button>
+                  </div>
+                  <pre><code>&lt;!-- Button Trigger --&gt;
+&lt;button class="btn btn-primary" 
+        data-bs-toggle="modal" 
+        data-bs-target="#myModal"&gt;
+  Launch Modal
+&lt;/button&gt;</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Accordion Demo -->
+            <div class="col-md-6">
+              <div class="demo-box h-100">
+                <div class="demo-title">Interactive Accordion Component</div>
+                
+                <div class="accordion" id="accordionExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        How does Accordion Collapse trigger work?
+                      </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        Uses <code>data-bs-toggle="collapse"</code> combined with <code>data-bs-target="#id"</code>, linked to parent accordion ID.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        CSS Mappings
+                      </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        Toggles <code>height</code> transitions via standard CSS classes.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="code-container mt-3">
+                  <div class="code-header">
+                    <span>Accordion Trigger Code</span>
+                    <button class="copy-btn"><i class="bi bi-clipboard"></i> Copy</button>
+                  </div>
+                  <pre><code>&lt;button class="accordion-button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#collapseOne"&gt;
+  Toggle Panel
+&lt;/button&gt;</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive mt-4">
+            <table class="table table-ref table-hover">
+              <thead>
+                <tr>
+                  <th>Data Attribute</th>
+                  <th>Key Values</th>
+                  <th>Target Element Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>data-bs-toggle</code></td>
+                  <td><code>"modal"</code>, <code>"collapse"</code>, <code>"dropdown"</code>, <code>"tooltip"</code>, <code>"carousel"</code></td>
+                  <td>Specifies which JavaScript plugin is hooked to the element.</td>
+                </tr>
+                <tr>
+                  <td><code>data-bs-target</code></td>
+                  <td>CSS Selector ID (e.g., <code>"#exampleModal"</code>)</td>
+                  <td>Points to the unique ID of the component element that should change.</td>
+                </tr>
+                <tr>
+                  <td><code>data-bs-dismiss</code></td>
+                  <td><code>"modal"</code>, <code>"alert"</code>, <code>"offcanvas"</code></td>
+                  <td>Instructs the plugin to close/remove the active parent container.</td>
+                </tr>
+                <tr>
+                  <td><code>data-bs-slide</code> / <code>data-bs-slide-to</code></td>
+                  <td><code>"prev"</code>, <code>"next"</code> / Index numbers (e.g., <code>"0"</code>)</td>
+                  <td>Controls direction movement for Carousels.</td>
+                </tr>
+                <tr>
+                  <td><code>data-bs-ride</code></td>
+                  <td><code>"carousel"</code></td>
+                  <td>Auto-starts slide transitions upon page load initialization.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: ARIA & Accessibility -->
+      <section id="section-accessibility" class="ref-section">
+        <div class="card-ref">
+          <div class="section-icon"><i class="bi bi-universal-access"></i></div>
+          <h2>ARIA & Accessible Attributes</h2>
+          <p class="text-muted">Integrate essential attributes to guarantee proper semantic access for assistive technologies (screen readers).</p>
+
+          <div class="table-responsive">
+            <table class="table table-ref table-hover">
+              <thead>
+                <tr>
+                  <th>ARIA Attribute</th>
+                  <th>Type / Value</th>
+                  <th>Semantic Context Mapped</th>
+                  <th>Screen Reader Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>role</code></td>
+                  <td><code>"dialog"</code>, <code>"alert"</code>, <code>"navigation"</code>, <code>"tablist"</code></td>
+                  <td>Assigns semantic meaning to generic layout wrappers.</td>
+                  <td>Declares structure type explicitly.</td>
+                </tr>
+                <tr>
+                  <td><code>aria-expanded</code></td>
+                  <td><code>"true"</code>, <code>"false"</code></td>
+                  <td>Identifies whether a submenu or accordion section is visible.</td>
+                  <td>Announces expanded or collapsed status.</td>
+                </tr>
+                <tr>
+                  <td><code>aria-labelledby</code></td>
+                  <td>Target Element ID reference</td>
+                  <td>Links container label descriptions directly to internal header text tags.</td>
+                  <td>Reads associated element's content as label description.</td>
+                </tr>
+                <tr>
+                  <td><code>aria-hidden</code></td>
+                  <td><code>"true"</code>, <code>"false"</code></td>
+                  <td>Excludes helper items (icons/backdrop divs) from readers.</td>
+                  <td>Completely ignores elements from text audio tracks.</td>
+                </tr>
+                <tr>
+                  <td><code>tabindex</code></td>
+                  <td><code>"0"</code>, <code>"-1"</code>, <code>"1"</code></td>
+                  <td>Controls focus behavior during keyboard tab cycling.</td>
+                  <td>Binds key navigation.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Custom CSS & Overrides -->
+      <section id="section-customization" class="ref-section">
+        <div class="card-ref">
+          <div class="section-icon"><i class="bi bi-sliders"></i></div>
+          <h2>Custom CSS Variable Integration</h2>
+          <p class="text-muted">Override Bootstrap's design colors and border ratios using root custom CSS variables (no Sass compiling required).</p>
+
+          <div class="code-container">
+            <div class="code-header">
+              <span>CSS Variables Overriding & Utility Classes (CSS)</span>
+              <button class="copy-btn"><i class="bi bi-clipboard"></i> Copy</button>
+            </div>
+            <pre><code>/* custom.css */
+:root {
+  /* Override Bootstrap Brand Colors using native CSS variables */
+  --bs-primary: #6366f1; /* Neon Purple */
+  --bs-primary-rgb: 99, 102, 241;
+  
+  --bs-success: #10b981; /* Emerald Green */
+  --bs-success-rgb: 16, 185, 129;
+
+  /* Custom component override */
+  --bs-border-radius: 12px;
+}
+
+/* Specificity override card targeting without utilizing !important */
+.custom-card {
+  border-radius: var(--bs-border-radius);
+  background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.1), rgba(var(--bs-success-rgb), 0.05));
+  border: 1px solid rgba(var(--bs-primary-rgb), 0.15);
+  transition: transform 0.2s ease;
+}
+
+.custom-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--bs-primary);
+}</code></pre>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom App JS Logic -->
+  <script>
+    // Theme Toggle Functionality
+    const htmlElement = document.documentElement;
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = htmlElement.getAttribute('data-bs-theme');
+      if (currentTheme === 'dark') {
+        htmlElement.setAttribute('data-bs-theme', 'light');
+        themeIcon.className = 'bi bi-moon-fill';
+      } else {
+        htmlElement.setAttribute('data-bs-theme', 'dark');
+        themeIcon.className = 'bi bi-sun-fill';
+      }
+    });
+
+    // Mobile Sidebar Toggle
+    const menuToggleBtn = document.getElementById('menuToggle');
+    const sidebarMenu = document.getElementById('sidebarMenu');
+
+    menuToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      sidebarMenu.classList.toggle('active');
+      const icon = menuToggleBtn.querySelector('i');
+      if (sidebarMenu.classList.contains('active')) {
+        icon.className = 'bi bi-x-lg';
+      } else {
+        icon.className = 'bi bi-list';
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (sidebarMenu.classList.contains('active') && !sidebarMenu.contains(e.target) && e.target !== menuToggleBtn) {
+        sidebarMenu.classList.remove('active');
+        menuToggleBtn.querySelector('i').className = 'bi bi-list';
+      }
+    });
+
+    // Interactive Grid Simulator
+    const gridColSelect = document.getElementById('gridColSelect');
+    const gridDemoWrapper = document.getElementById('gridDemoWrapper');
+
+    function updateGridDemo() {
+      const config = gridColSelect.value;
+      gridDemoWrapper.innerHTML = '';
+      
+      if (config === '12') {
+        for(let i = 1; i <= 12; i++) {
+          gridDemoWrapper.innerHTML += `<div class="col-1"><div class="grid-col-demo small text-truncate">col-1</div></div>`;
+        }
+      } else if (config === '4') {
+        for(let i = 1; i <= 3; i++) {
+          gridDemoWrapper.innerHTML += `<div class="col-4"><div class="grid-col-demo">col-4</div></div>`;
+        }
+      } else if (config === '6') {
+        for(let i = 1; i <= 2; i++) {
+          gridDemoWrapper.innerHTML += `<div class="col-6"><div class="grid-col-demo">col-6</div></div>`;
+        }
+      } else if (config === 'hybrid') {
+        gridDemoWrapper.innerHTML = `
+          <div class="col-8"><div class="grid-col-demo">col-8 (Main Section)</div></div>
+          <div class="col-4"><div class="grid-col-demo">col-4 (Sidebar)</div></div>
+        `;
+      } else if (config === 'responsive') {
+        gridDemoWrapper.innerHTML = `
+          <div class="col-sm-6 col-md-4"><div class="grid-col-demo">col-sm-6 col-md-4</div></div>
+          <div class="col-sm-6 col-md-4"><div class="grid-col-demo">col-sm-6 col-md-4</div></div>
+          <div class="col-sm-12 col-md-4"><div class="grid-col-demo">col-sm-12 col-md-4</div></div>
+        `;
+      }
+    }
+    
+    gridColSelect.addEventListener('change', updateGridDemo);
+    updateGridDemo(); // Init grid simulator
+
+    // Interactive Spacing Simulator
+    const spacingRange = document.getElementById('spacingRange');
+    const spacingValueText = document.getElementById('spacingValueText');
+    const spacingDemoBox = document.getElementById('spacingDemoBox');
+    const spacingButtons = document.querySelectorAll('.spacing-type-btn');
+    let currentSpacingType = 'p';
+
+    function updateSpacingDemo() {
+      const val = spacingRange.value;
+      spacingValueText.textContent = val;
+      
+      // Clear old spacing classes
+      spacingDemoBox.className = "bg-primary text-white text-center";
+      
+      // Apply new spacing class
+      const targetClass = `${currentSpacingType}-${val}`;
+      spacingDemoBox.classList.add(targetClass);
+    }
+
+    spacingRange.addEventListener('input', updateSpacingDemo);
+    
+    spacingButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        spacingButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentSpacingType = btn.getAttribute('data-type');
+        updateSpacingDemo();
+      });
+    });
+    updateSpacingDemo(); // Init spacing simulator
+
+    // Interactive Flexbox Alignment Simulator
+    const justifyBtns = document.querySelectorAll('.flex-justify-btn');
+    const alignBtns = document.querySelectorAll('.flex-align-btn');
+    const flexContainerDemo = document.getElementById('flexContainerDemo');
+    const flexClassOutput = document.getElementById('flexClassOutput');
+    let currentJustify = 'justify-content-start';
+    let currentAlign = 'align-items-start';
+
+    function updateFlexDemo() {
+      flexContainerDemo.className = `flex-playground-area d-flex gap-3 ${currentJustify} ${currentAlign}`;
+      flexClassOutput.textContent = `d-flex ${currentJustify} ${currentAlign} gap-3`;
+    }
+
+    justifyBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        justifyBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentJustify = btn.getAttribute('data-class');
+        updateFlexDemo();
+      });
+    });
+
+    alignBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        alignBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentAlign = btn.getAttribute('data-class');
+        updateFlexDemo();
+      });
+    });
+
+    // Interactive Table Simulator
+    const tableOptions = document.querySelectorAll('.table-opt-chk');
+    const liveDemoTable = document.getElementById('liveDemoTable');
+    const tableClassOutput = document.getElementById('tableClassOutput');
+
+    function updateTableDemo() {
+      // Clear all classes except base 'table' and alignment
+      liveDemoTable.className = "table align-middle";
+      let classes = ["table"];
+      
+      if (document.getElementById('chkTableStriped').checked) {
+        liveDemoTable.classList.add('table-striped');
+        classes.push('table-striped');
+      }
+      if (document.getElementById('chkTableHover').checked) {
+        liveDemoTable.classList.add('table-hover');
+        classes.push('table-hover');
+      }
+      if (document.getElementById('chkTableBordered').checked) {
+        liveDemoTable.classList.add('table-bordered');
+        classes.push('table-bordered');
+      }
+      if (document.getElementById('chkTableDark').checked) {
+        liveDemoTable.classList.add('table-dark');
+        classes.push('table-dark');
+      }
+      
+      tableClassOutput.textContent = classes.join(' ');
+    }
+
+    tableOptions.forEach(opt => {
+      opt.addEventListener('change', updateTableDemo);
+    });
+    updateTableDemo(); // Init table demo
+
+    // Copy to Clipboard Script
+    const copyButtons = document.querySelectorAll('.copy-btn');
+    copyButtons.forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const codeBlock = btn.closest('.code-container').querySelector('code');
+        const text = codeBlock.innerText;
+        
+        try {
+          await navigator.clipboard.writeText(text);
+          btn.innerHTML = `<i class="bi bi-check-lg"></i> Copied!`;
+          setTimeout(() => {
+            btn.innerHTML = `<i class="bi bi-clipboard"></i> Copy`;
+          }, 2000);
+        } catch (err) {
+          console.error("Failed to copy code: ", err);
+        }
+      });
+    });
+
+    // Instant Search / Filter logic
+    const searchBar = document.getElementById('searchBar');
+    const refSections = document.querySelectorAll('.ref-section');
+
+    searchBar.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      
+      refSections.forEach(section => {
+        const textContent = section.textContent.toLowerCase();
+        
+        if (textContent.includes(query)) {
+          section.style.display = 'block';
+        } else {
+          section.style.display = 'none';
+        }
+      });
+    });
+
+    // Bootstrap Tooltip Initialization (Required for Bootstrap tooltips to work)
+    document.addEventListener("DOMContentLoaded", function() {
+      const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      tooltipTriggerList.map(function(tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+      });
+    });
+  </script>
+</body>
+</html>
